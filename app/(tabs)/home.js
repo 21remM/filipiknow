@@ -65,7 +65,7 @@ export default function HomeScreen() {
       </ScrollView>
 
       <Button
-        title="Try translating 'Pusa'"
+        title="Practice: Try translating 'Pusa'"
         onPress={() => router.push("/vocab/pusa")}
       />
       <Button title="Go to Settings" onPress={() => router.push("/settings")} />

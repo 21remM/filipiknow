@@ -10,7 +10,7 @@ export default function VocabEntryScreen() {
 
   useEffect(() => {
     if (id) {
-      navigation.setOptions({ title: `Translate: ${id}` });
+      navigation.setOptions({ title: `Practice` });
     }
   }, [id]);
 

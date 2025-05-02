@@ -8,7 +8,7 @@ export default function VocabDetails() {
 
   useEffect(() => {
     if (id) {
-      navigation.setOptions({ title: `Details: ${id}` });
+      navigation.setOptions({ title: `Usage` });
     }
   }, [id]);
 
@@ -20,7 +20,7 @@ export default function VocabDetails() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>More About: {id}</Text>
+      <Text style={styles.title}>How to use the word: {id}</Text>
       <Text style={styles.text}>{examples[id] || "No example available."}</Text>
     </View>
   );
