@@ -1,6 +1,6 @@
 import { View, Text, Button, StyleSheet } from "react-native";
-import { useLocalSearchParams } from "expo-router";
-import { useState, useRef } from "react";
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useState, useRef, useEffect } from "react";
 import ConfettiCannon from "react-native-confetti-cannon";
 
 const quizData = {
@@ -18,10 +18,18 @@ const quizData = {
 
 export default function QuizById() {
   const { id } = useLocalSearchParams();
+  const navigation = useNavigation();
   const [selected, setSelected] = useState(null);
   const cannonRef = useRef(null);
 
+  useEffect(() => {
+    if (id) {
+      navigation.setOptions({ title: `Quiz: ${id}` });
+    }
+  }, [id]);
+
   const data = quizData[id];
+
   if (!data) {
     return (
       <View style={styles.container}>
@@ -41,6 +49,14 @@ export default function QuizById() {
 
   return (
     <View style={styles.container}>
+      <ConfettiCannon
+        count={50}
+        origin={{ x: 200, y: 0 }}
+        autoStart={false}
+        fadeOut
+        ref={cannonRef}
+      />
+
       <Text style={styles.title}>{data.question}</Text>
 
       {data.options.map((option, index) => (
@@ -54,15 +70,6 @@ export default function QuizById() {
           {isCorrect ? "Correct!" : `Incorrect. The answer is: ${data.answer}`}
         </Text>
       )}
-
-      {/* Confetti on correct answer */}
-      <ConfettiCannon
-        count={50}
-        origin={{ x: 200, y: 0 }}
-        fadeOut
-        autoStart={false}
-        ref={cannonRef}
-      />
     </View>
   );
 }

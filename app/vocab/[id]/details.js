@@ -1,8 +1,16 @@
 import { View, Text, StyleSheet } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useEffect } from "react";
 
 export default function VocabDetails() {
   const { id } = useLocalSearchParams();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    if (id) {
+      navigation.setOptions({ title: `Details: ${id}` });
+    }
+  }, [id]);
 
   const examples = {
     pusa: "Ang pusa ay nasa ilalim ng mesa. (The cat is under the table.)",

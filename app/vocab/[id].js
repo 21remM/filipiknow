@@ -1,11 +1,18 @@
 import { View, Text, TextInput, StyleSheet, Button } from "react-native";
-import { useState } from "react";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useState, useEffect } from "react";
+import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 
 export default function VocabEntryScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
+  const navigation = useNavigation();
   const [userTranslation, setUserTranslation] = useState("");
+
+  useEffect(() => {
+    if (id) {
+      navigation.setOptions({ title: `Translate: ${id}` });
+    }
+  }, [id]);
 
   return (
     <View style={styles.container}>
