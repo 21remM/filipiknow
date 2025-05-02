@@ -16,6 +16,10 @@ export default function SettingsScreen() {
         <Text style={styles.label}>Enable Sound</Text>
         <Switch value={isEnabled} onValueChange={toggleSwitch} />
       </View>
+      <Button
+        title="About the App"
+        onPress={() => router.push("/modal/about")}
+      />
     </View>
   );
 }
