@@ -37,9 +37,19 @@ export default function HomeScreen() {
           <Pressable
             key={key}
             onPress={() => setSelectedCategory(key)}
-            style={styles.category}
+            style={[
+              styles.category,
+              selectedCategory === key && styles.activeCategory,
+            ]}
           >
-            <Text style={styles.categoryText}>{key}</Text>
+            <Text
+              style={[
+                styles.categoryText,
+                selectedCategory === key && styles.activeCategoryText,
+              ]}
+            >
+              {key}
+            </Text>
           </Pressable>
         ))}
       </View>
@@ -91,8 +101,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     marginBottom: 20,
   },
-  category: { backgroundColor: "#eee", padding: 10, borderRadius: 10 },
-  categoryText: { fontSize: 16 },
+  category: {
+    backgroundColor: "#eee",
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 10,
+    marginHorizontal: 4,
+  },
+  activeCategory: {
+    backgroundColor: "#ffc700",
+  },
+  categoryText: { fontSize: 16, color: "#333" },
+  activeCategoryText: { color: "#fff", fontWeight: "bold" },
+
   list: { flex: 1 },
   card: {
     padding: 16,
