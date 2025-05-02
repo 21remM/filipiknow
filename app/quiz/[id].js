@@ -30,17 +30,18 @@ export default function QuizById() {
   }
 
   const handleAnswer = (option) => setSelected(option);
-
   const isCorrect = selected === data.answer;
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{data.question}</Text>
+
       {data.options.map((option, index) => (
-        <View key={index} style={styles.button}>
+        <View key={index} style={styles.buttonWrapper}>
           <Button title={option} onPress={() => handleAnswer(option)} />
         </View>
       ))}
+
       {selected && (
         <Text style={[styles.feedback, { color: isCorrect ? "green" : "red" }]}>
           {isCorrect ? "Correct!" : `Incorrect. The answer is: ${data.answer}`}
@@ -52,7 +53,7 @@ export default function QuizById() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", padding: 20 },
-  title: { fontSize: 22, fontWeight: "bold", marginBottom: 20 },
-  button: { marginVertical: 6 },
+  title: { fontSize: 22, marginBottom: 20, fontWeight: "bold" },
+  buttonWrapper: { marginVertical: 5 },
   feedback: { marginTop: 20, fontSize: 18, fontWeight: "bold" },
 });

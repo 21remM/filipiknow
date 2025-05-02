@@ -26,8 +26,8 @@ const categories = {
 
 export default function HomeScreen() {
   const [selectedCategory, setSelectedCategory] = useState("Words");
-
   const router = useRouter();
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Choose a category:</Text>
@@ -53,11 +53,11 @@ export default function HomeScreen() {
           />
         ))}
       </ScrollView>
+
       <Button
         title="Try translating 'Pusa'"
         onPress={() => router.push("/vocab/pusa")}
       />
-
       <Button title="Go to Settings" onPress={() => router.push("/settings")} />
     </View>
   );
@@ -65,11 +65,20 @@ export default function HomeScreen() {
 
 function TranslationCard({ tagalog, english }) {
   const [revealed, setRevealed] = useState(false);
+  const router = useRouter();
 
   return (
     <Pressable onPress={() => setRevealed(!revealed)} style={styles.card}>
       <Text style={styles.cardText}>{tagalog}</Text>
-      {revealed && <Text style={styles.translation}>{english}</Text>}
+      {revealed && (
+        <>
+          <Text style={styles.translation}>{english}</Text>
+          <Button
+            title="Quiz me on this"
+            onPress={() => router.push(`/quiz/${tagalog.toLowerCase()}`)}
+          />
+        </>
+      )}
     </Pressable>
   );
 }
